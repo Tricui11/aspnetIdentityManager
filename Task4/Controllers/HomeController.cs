@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using Task4.Models;
 
 namespace Task4.Controllers
 {
+    [Authorize(Roles = "admin, guest")]
     public class HomeController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -36,21 +38,21 @@ namespace Task4.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-               [Route("display")]
- //       [HttpGet("api/[action]")]
+        
+        [Route("users")]
+        [Authorize(Roles = "admin")]
+        //       [HttpGet("api/[action]")]
         public IActionResult UserList()
         {
             var users = _userManager.Users;
 
             var result = new
             {
-                recordsTotal = users.Count(),
                 data = users.Select(u => new {
-                    Id = u.Id,
+                    id = u.Id,
                     email = u.Email,
-                    LockedOut = u.LockoutEnd == null ? String.Empty : "Yes",
-                    UserName = u.UserName
+                    lockedOut = u.LockoutEnd == null ? String.Empty : "Yes",
+                    userName = u.UserName
                 }).ToArray()
             };
             return Json(result);

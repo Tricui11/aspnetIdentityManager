@@ -4,3 +4,37 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's Users manage.</p>
+<table id="UsersTable" class="display">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>LockedOut</th>
+            <th>UserName</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts{
+    @* Normal *@
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#UsersTable").DataTable(
+                {
+                    "ajax": {
+                        "url": "/users",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "email" },
+                        { "data": "lockedOut" },
+                        { "data": "userName" }
+                    ]
+                });
+        });
+    </script>
+}

@@ -73,7 +73,6 @@ C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Task4.Tag
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Task4.RazorCoreGenerate.cache
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -343,3 +342,8 @@ C:\Users\furer\Desktop\Itransition\Task4\AuthenticationUserManagement\Task4\bin\
 C:\Users\furer\Desktop\Itransition\Task4\AuthenticationUserManagement\Task4\obj\Debug\netcoreapp3.1\Task4.csproj.CoreCompileInputs.cache
 C:\Users\furer\Desktop\Itransition\Task4\AuthenticationUserManagement\Task4\obj\Debug\netcoreapp3.1\Task4.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\furer\Desktop\Itransition\Task4\AuthenticationUserManagement\Task4\obj\Debug\netcoreapp3.1\Task4.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\furer\Desktop\Itransition\Task4\Task4\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Create.cshtml.g.cs
+C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Edit.cshtml.g.cs
+C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Index.cshtml.g.cs
+C:\Users\furer\Desktop\Itransition\Task4\Task4\obj\Debug\netcoreapp3.1\Razor\Views\Roles\UserList.cshtml.g.cs
