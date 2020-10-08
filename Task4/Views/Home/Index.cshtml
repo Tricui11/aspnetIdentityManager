@@ -5,3 +5,68 @@
 <div class="text-center">
     <h1 class="display-4">User management</h1>
 </div>
+<input type="button" id="delete"
+       value="Delete Selected Customers" />
+<br /><br />
+<table id="UsersTable" border="1" cellpadding="10">
+    <tr>
+        <th><input type="checkbox" id="checkAll" /></th>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Registration Date</th>
+        <th>Last Login Date</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                <input type="checkbox" class="checkBox"
+                       value="@user.Id" />
+            </td>
+            <td>@user.Id</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@user.RegisterDate</td>
+            <td>@user.LastLoginDate</td>
+            <td>@user.Status</td>
+        </tr>
+    }
+</table>
+
+@section scripts{
+    @* Normal *@
+    <script>
+        $(document).ready(function () {
+
+            $("#checkAll").click(function () {
+                $(".checkBox").prop('checked',
+                    $(this).prop('checked'));
+            });
+
+            $("#delete").click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.checkBox').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
+                    }
+                });
+
+                var options = {};
+                options.url = "/home/delete";
+                options.type = "POST";
+                options.data = JSON.stringify(selectedIDs);
+                options.contentType = "application/json";
+                options.dataType = "json";
+                options.success = function (msg) {
+                    alert(msg);
+                };
+                options.error = function () {
+                    alert("Error while deleting the records!");
+                };
+                $.ajax(options);
+            });
+        });
+    </script>
+}
