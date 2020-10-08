@@ -14,10 +14,10 @@ namespace Task4.Controllers
     [Authorize(Roles = "admin, guest")]
     public class HomeController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(UserManager<IdentityUser> userManager, ILogger<HomeController> logger)
+        public HomeController(UserManager<User> userManager, ILogger<HomeController> logger)
         {
             _userManager = userManager;
             _logger = logger;
@@ -40,7 +40,7 @@ namespace Task4.Controllers
         }
         
         [Route("users")]
-        [Authorize(Roles = "admin")]
+   //     [Authorize(Roles = "admin")]
         //       [HttpGet("api/[action]")]
         public IActionResult UserList()
         {
@@ -50,9 +50,11 @@ namespace Task4.Controllers
             {
                 data = users.Select(u => new {
                     id = u.Id,
+                    userName = u.UserName,
                     email = u.Email,
-                    lockedOut = u.LockoutEnd == null ? String.Empty : "Yes",
-                    userName = u.UserName
+                    regdate = u.RegisterDate.Value.ToString().Remove(u.RegisterDate.Value.ToString().LastIndexOf('.')),
+                    lastlogindate = u.LastLoginDate.Value.ToString().Remove(u.LastLoginDate.Value.ToString().LastIndexOf('.')),
+                    status = u.Status
                 }).ToArray()
             };
             return Json(result);

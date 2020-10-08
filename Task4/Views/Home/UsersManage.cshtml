@@ -7,32 +7,53 @@
 <table id="UsersTable" class="display">
     <thead>
         <tr>
+            <th></th>
             <th>Id</th>
-            <th>Email</th>
-            <th>LockedOut</th>
             <th>UserName</th>
+            <th>Email</th>
+            <th>Registration Date</th>
+            <th>Last Login Date</th>
+            <th>Status</th>
         </tr>
     </thead>
 </table>
 
 @section scripts{
     @* Normal *@
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"></link>
+    <link type="text/css" href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+
     <script>
         $(document).ready(function () {
 
             $("#UsersTable").DataTable(
-                {
+                {    
+                    columnDefs: [{
+                        targets: 0,
+                        'checkboxes': {
+                            'selectRow': true
+                        }
+                    }],
+                    select: {
+                        style: 'os'
+                    },
                     "ajax": {
                         "url": "/users",
                         "type": "GET",
                         "datatype": "json"
                     },
                     "columns": [
+                        { "defaultContent": "" },
                         { "data": "id" },
+                        { "data": "userName" },
                         { "data": "email" },
-                        { "data": "lockedOut" },
-                        { "data": "userName" }
+                        { "data": "regdate" },
+                        { "data": "lastlogindate" },
+                        { "data": "status" }
                     ]
                 });
         });
