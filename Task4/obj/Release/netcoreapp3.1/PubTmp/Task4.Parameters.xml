@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="MyTask4" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\furer\\Desktop\\Itransition\\Task4\\Task4\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Task4.Data.ApplicationDbContext" description="" value="Server=tcp:mytask4dbserver.database.windows.net,1433;Initial Catalog=Task4_db;Persist Security Info=False;User ID=admin11;Password=3211_2311Ser;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\furer\\Desktop\\Itransition\\Task4\\Task4\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\Task4\.Data\.ApplicationDbContext\.sql$" />
+  </parameter>
+</parameters>

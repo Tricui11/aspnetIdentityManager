@@ -1,12 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
     <h1 class="display-4">User management</h1>
 </div>
-<input type="button" id="delete"
-       value="Delete Selected Customers" />
+<div class="toolbar">
+    <input type="button" id="block"
+           value="Block" />
+    <input type="button" id="unblock" class="btn add btn-success"
+           value="Unblock" />
+    <input type="button" id="delete" class="btn edit btn-danger"
+           value="Delete" />
+</div>
 <br /><br />
 <table id="UsersTable" border="1" cellpadding="10">
     <tr>
@@ -37,7 +42,7 @@
 
 @section scripts{
     @* Normal *@
-    <script>
+<script>
         $(document).ready(function () {
 
             $("#checkAll").click(function () {
@@ -56,17 +61,46 @@
                 var options = {};
                 options.url = "/home/delete";
                 options.type = "POST";
-                options.data = JSON.stringify(selectedIDs);
-                options.contentType = "application/json";
-                options.dataType = "json";
-                options.success = function (msg) {
-                    alert(msg);
+                options.data = { selectedIDs: selectedIDs };
+                options.success = function (json) {
+                    if (json.isRedirect) { window.location.href = json.redirectUrl; }
                 };
-                options.error = function () {
-                    alert("Error while deleting the records!");
+                $.ajax(options);
+            });
+            $("#block").click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.checkBox').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
+                    }
+                });
+
+                var options = {};
+                options.url = "/home/block";
+                options.type = "POST";
+                options.data = { selectedIDs: selectedIDs };
+                options.success = function (json) {
+                    if (json.isRedirect) { window.location.href = json.redirectUrl; }
+                };
+                $.ajax(options);
+            });
+            $("#unblock").click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.checkBox').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
+                    }
+                });
+
+                var options = {};
+                options.url = "/home/unblock";
+                options.type = "POST";
+                options.data = { selectedIDs: selectedIDs };
+                options.success = function (json) {
+                    if (json.isRedirect) { window.location.href = json.redirectUrl; }
                 };
                 $.ajax(options);
             });
         });
-    </script>
+</script>
 }

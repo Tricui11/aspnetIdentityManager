@@ -55,8 +55,8 @@ namespace Task4.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
+    //        [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
@@ -78,14 +78,15 @@ namespace Task4.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email, RegisterDate = DateTime.Now };
+                var user = new User { UserName = Input.Email, Email = Input.Email, RegisterDate = DateTime.Now, Status = "Unblocked" };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
                     // Add default role for new user
-                    await _userManager.AddToRoleAsync(user, "guest");
+                    await _userManager.AddToRoleAsync(user, "Unblocked");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    await _userManager.SetLockoutEnabledAsync(user, false);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",

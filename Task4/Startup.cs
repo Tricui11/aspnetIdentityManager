@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Task4.Data;
 using Microsoft.Extensions.Configuration;
@@ -31,12 +25,24 @@ namespace Task4
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddDefaultUI()
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddIdentity<User, IdentityRole>(setupAction =>
+            {
+                setupAction.Password.RequireDigit = false;
+                setupAction.Password.RequiredUniqueChars = 0;
+                setupAction.Password.RequireLowercase = false;
+                setupAction.Password.RequireNonAlphanumeric = false;
+                setupAction.Password.RequireUppercase = false;
+                setupAction.Password.RequiredLength = 1;
+                setupAction.SignIn.RequireConfirmedEmail = false;
+                setupAction.SignIn.RequireConfirmedPhoneNumber = false;
+                setupAction.SignIn.RequireConfirmedAccount = true;
+            })
+                .AddDefaultUI()
+                .AddDefaultTokenProviders().
+                AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +66,7 @@ namespace Task4
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseUserDestroyer();
 
             app.UseEndpoints(endpoints =>
             {
